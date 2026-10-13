@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Temp\\x64\\Debug\\qte.obj",
+            "outputs": [
+                "Temp\\x64\\Debug\\qte.h.obj.dt.module.json",
+                "Temp\\x64\\Debug\\qte.h.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}

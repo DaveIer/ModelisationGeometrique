@@ -1,18 +1,6 @@
 ﻿  Moc'ing  Include\qte.h  into  Source\moc_qte.cpp
   Compiling  UI\interface.ui  into  Include\ui_interface.h
-  Moc'ing  Include\realtime.h  into  Source\realtime-moc.cpp
-  box.cpp
-  camera.cpp
-  evector.cpp
-  implicits.cpp
   main.cpp
-  mesh-widget.cpp
-  mesh.cpp
-  meshcolor.cpp
   moc_qte.cpp
-  realtime-moc.cpp
   qtemainwindow.cpp
-  ray.cpp
-  shader-api.cpp
-  triangle.cpp
   AppTinyMesh.vcxproj -> C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\Out\x64\Debug\AppTinyMesh.exe

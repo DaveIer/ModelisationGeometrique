@@ -102,6 +102,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Adapters\NodeFieldAdapter.cpp" />
     <ClCompile Include="Source\box.cpp" />
     <ClCompile Include="Source\camera.cpp" />
     <ClCompile Include="Source\evector.cpp" />
@@ -114,6 +115,9 @@
     <ClCompile Include="Source\realtime-moc.cpp" />
     <ClCompile Include="Source\qtemainwindow.cpp" />
     <ClCompile Include="Source\ray.cpp" />
+    <ClCompile Include="Source\SDF\BoxNode.cpp" />
+    <ClCompile Include="Source\SDF\SphereNode.cpp" />
+    <ClCompile Include="Source\SDF\TorusNode.cpp" />
     <ClCompile Include="Source\shader-api.cpp" />
     <ClCompile Include="Source\triangle.cpp" />
   </ItemGroup>
@@ -156,6 +160,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\Adapters\NodeFieldAdapter.h" />
     <ClInclude Include="Include\box.h" />
     <ClInclude Include="Include\camera.h" />
     <ClInclude Include="Include\color.h" />
@@ -164,6 +169,10 @@
     <ClInclude Include="Include\mesh.h" />
     <ClInclude Include="Include\meshcolor.h" />
     <ClInclude Include="Include\ray.h" />
+    <ClInclude Include="Include\SDF\BoxNode.h" />
+    <ClInclude Include="Include\SDF\Node.h" />
+    <ClInclude Include="Include\SDF\SphereNode.h" />
+    <ClInclude Include="Include\SDF\TorusNode.h" />
     <ClInclude Include="Include\shader-api.h" />
   </ItemGroup>
   <ItemGroup>

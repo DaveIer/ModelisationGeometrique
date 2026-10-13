@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Temp\\x64\\Debug\\implicits.obj",
+            "outputs": [
+                "Temp\\x64\\Debug\\implicits.cpp.obj.dt.module.json",
+                "Temp\\x64\\Debug\\implicits.cpp.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}

@@ -1,3 +1,4 @@
+C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Source\Adapters\NodeFieldAdapter.cpp;C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Temp\x64\Debug\NodeFieldAdapter.obj
 C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Source\box.cpp;C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Temp\x64\Debug\box.obj
 C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Source\camera.cpp;C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Temp\x64\Debug\camera.obj
 C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Source\evector.cpp;C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Temp\x64\Debug\evector.obj
@@ -10,5 +11,8 @@ C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Source\moc_qte.
 C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Source\realtime-moc.cpp;C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Temp\x64\Debug\realtime-moc.obj
 C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Source\qtemainwindow.cpp;C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Temp\x64\Debug\qtemainwindow.obj
 C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Source\ray.cpp;C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Temp\x64\Debug\ray.obj
+C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Source\SDF\BoxNode.cpp;C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Temp\x64\Debug\BoxNode.obj
+C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Source\SDF\SphereNode.cpp;C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Temp\x64\Debug\SphereNode.obj
+C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Source\SDF\TorusNode.cpp;C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Temp\x64\Debug\TorusNode.obj
 C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Source\shader-api.cpp;C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Temp\x64\Debug\shader-api.obj
 C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Source\triangle.cpp;C:\Users\david\Documents\ID3D\ModGeom\test2\TinyMesh\AppTinyMesh\Temp\x64\Debug\triangle.obj

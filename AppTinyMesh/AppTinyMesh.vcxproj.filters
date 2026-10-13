@@ -41,6 +41,18 @@
     <ClCompile Include="Source\implicits.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SDF\BoxNode.cpp">
+      <Filter>Source\SDF</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SDF\SphereNode.cpp">
+      <Filter>Source\SDF</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SDF\TorusNode.cpp">
+      <Filter>Source\SDF</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Adapters\NodeFieldAdapter.cpp">
+      <Filter>Source\Adapters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Include\qte.h">
@@ -75,6 +87,18 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{8b50c486-7a12-4404-bb16-16855aee3d6d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\SDF">
+      <UniqueIdentifier>{d0642601-d8ff-4461-b9c6-d768d639dd2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Adapters">
+      <UniqueIdentifier>{fd58a5fd-29cf-4057-b413-b4b499b2488e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\SDF">
+      <UniqueIdentifier>{5a4bb053-b150-4c70-831d-99c22c45e633}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Adapters">
+      <UniqueIdentifier>{ec7c6244-645c-4224-b208-bb3bec7f61ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\box.h">
@@ -103,6 +127,21 @@
     </ClInclude>
     <ClInclude Include="Include\implicits.h">
       <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDF\BoxNode.h">
+      <Filter>Include\SDF</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDF\Node.h">
+      <Filter>Include\SDF</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDF\SphereNode.h">
+      <Filter>Include\SDF</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDF\TorusNode.h">
+      <Filter>Include\SDF</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Adapters\NodeFieldAdapter.h">
+      <Filter>Include\Adapters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
