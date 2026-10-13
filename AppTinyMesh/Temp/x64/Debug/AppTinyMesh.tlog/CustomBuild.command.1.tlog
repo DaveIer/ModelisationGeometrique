@@ -1,0 +1,6 @@
+^C:\USERS\DAVID\DOCUMENTS\ID3D\MODGEOM\TEST2\TINYMESH\APPTINYMESH\INCLUDE\QTE.H
+C:\Qt\6.11.2\msvc2022_64\bin\moc.exe Include\qte.h -o Source\moc_qte.cpp
+^C:\USERS\DAVID\DOCUMENTS\ID3D\MODGEOM\TEST2\TINYMESH\APPTINYMESH\UI\INTERFACE.UI
+C:\Qt\6.11.2\msvc2022_64\bin\uic.exe UI\interface.ui -o Include\ui_interface.h
+^C:\USERS\DAVID\DOCUMENTS\ID3D\MODGEOM\TEST2\TINYMESH\APPTINYMESH\INCLUDE\REALTIME.H
+C:\Qt\6.11.2\msvc2022_64\bin\moc.exe Include\realtime.h -o Source\realtime-moc.cpp
