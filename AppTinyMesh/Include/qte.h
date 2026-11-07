@@ -33,8 +33,17 @@ public slots:
 	void UpdateMaterial();
 
 	// Imene
+	// primitives examples
 	void SphereNodeExample();
 	void BoxNodeExample();
+	void TorusNodeExample();
+	void CapsuleNodeExample();
+
+	// simple operations examples
+	void UnionNodeExample();
+	void IntersectionNodeExample();
+	void DifferenceNodeExample();
+
 };
 
 #endif

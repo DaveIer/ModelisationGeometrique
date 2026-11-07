@@ -19,13 +19,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -115,9 +115,14 @@
     <ClCompile Include="Source\realtime-moc.cpp" />
     <ClCompile Include="Source\qtemainwindow.cpp" />
     <ClCompile Include="Source\ray.cpp" />
+    <ClCompile Include="Source\SDF\BinaryNode.cpp" />
     <ClCompile Include="Source\SDF\BoxNode.cpp" />
+    <ClCompile Include="Source\SDF\CapsuleNode.cpp" />
+    <ClCompile Include="Source\SDF\DifferenceNode.cpp" />
+    <ClCompile Include="Source\SDF\IntersectionNode.cpp" />
     <ClCompile Include="Source\SDF\SphereNode.cpp" />
     <ClCompile Include="Source\SDF\TorusNode.cpp" />
+    <ClCompile Include="Source\SDF\UnionNode.cpp" />
     <ClCompile Include="Source\shader-api.cpp" />
     <ClCompile Include="Source\triangle.cpp" />
   </ItemGroup>
@@ -169,10 +174,15 @@
     <ClInclude Include="Include\mesh.h" />
     <ClInclude Include="Include\meshcolor.h" />
     <ClInclude Include="Include\ray.h" />
+    <ClInclude Include="Include\SDF\BinaryNode.h" />
     <ClInclude Include="Include\SDF\BoxNode.h" />
+    <ClInclude Include="Include\SDF\CapsuleNode.h" />
+    <ClInclude Include="Include\SDF\DifferenceNode.h" />
+    <ClInclude Include="Include\SDF\IntersectionNode.h" />
     <ClInclude Include="Include\SDF\Node.h" />
     <ClInclude Include="Include\SDF\SphereNode.h" />
     <ClInclude Include="Include\SDF\TorusNode.h" />
+    <ClInclude Include="Include\SDF\UnionNode.h" />
     <ClInclude Include="Include\shader-api.h" />
   </ItemGroup>
   <ItemGroup>

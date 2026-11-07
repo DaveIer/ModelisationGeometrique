@@ -46,6 +46,11 @@ public:
     QPushButton *sphereImplicit;
     QPushButton *sphereNode;
     QPushButton *boxNode;
+    QPushButton *torusNode;
+    QPushButton *capsuleNode;
+    QPushButton *unionNode;
+    QPushButton *intersectionNode;
+    QPushButton *differenceNode;
     QWidget *widget_GL;
     QGroupBox *Parameters_groupBox;
     QGroupBox *groupBox_4;
@@ -121,6 +126,26 @@ public:
         boxNode->setObjectName("boxNode");
         boxNode->setGeometry(QRect(20, 110, 101, 23));
         boxNode->setCheckable(false);
+        torusNode = new QPushButton(Objects_groupBox);
+        torusNode->setObjectName("torusNode");
+        torusNode->setGeometry(QRect(20, 140, 101, 23));
+        torusNode->setCheckable(false);
+        capsuleNode = new QPushButton(Objects_groupBox);
+        capsuleNode->setObjectName("capsuleNode");
+        capsuleNode->setGeometry(QRect(20, 170, 101, 23));
+        capsuleNode->setCheckable(false);
+        unionNode = new QPushButton(Objects_groupBox);
+        unionNode->setObjectName("unionNode");
+        unionNode->setGeometry(QRect(20, 200, 101, 23));
+        unionNode->setCheckable(false);
+        intersectionNode = new QPushButton(Objects_groupBox);
+        intersectionNode->setObjectName("intersectionNode");
+        intersectionNode->setGeometry(QRect(20, 230, 101, 23));
+        intersectionNode->setCheckable(false);
+        differenceNode = new QPushButton(Objects_groupBox);
+        differenceNode->setObjectName("differenceNode");
+        differenceNode->setGeometry(QRect(20, 260, 101, 23));
+        differenceNode->setCheckable(false);
 
         hboxLayout->addWidget(Objects_groupBox);
 
@@ -254,6 +279,61 @@ public:
 "								", nullptr));
 #endif // QT_CONFIG(tooltip)
         boxNode->setText(QCoreApplication::translate("Assets", "Box Node", nullptr));
+#if QT_CONFIG(tooltip)
+        torusNode->setToolTip(QCoreApplication::translate("Assets", "\n"
+"									<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"									<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"									p, li { white-space: pre-wrap; }\n"
+"									</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#5500ff;\">Callback #01</span></p>\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:italic; color:#aa00ff;\">Create Eurographics 1996 Bear</span></p></body></html>\n"
+"								", nullptr));
+#endif // QT_CONFIG(tooltip)
+        torusNode->setText(QCoreApplication::translate("Assets", "Torus Node", nullptr));
+#if QT_CONFIG(tooltip)
+        capsuleNode->setToolTip(QCoreApplication::translate("Assets", "\n"
+"									<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"									<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"									p, li { white-space: pre-wrap; }\n"
+"									</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#5500ff;\">Callback #01</span></p>\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:italic; color:#aa00ff;\">Create Eurographics 1996 Bear</span></p></body></html>\n"
+"								", nullptr));
+#endif // QT_CONFIG(tooltip)
+        capsuleNode->setText(QCoreApplication::translate("Assets", "Capsule Node", nullptr));
+#if QT_CONFIG(tooltip)
+        unionNode->setToolTip(QCoreApplication::translate("Assets", "\n"
+"									<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"									<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"									p, li { white-space: pre-wrap; }\n"
+"									</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#5500ff;\">Callback #01</span></p>\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:italic; color:#aa00ff;\">Create Eurographics 1996 Bear</span></p></body></html>\n"
+"								", nullptr));
+#endif // QT_CONFIG(tooltip)
+        unionNode->setText(QCoreApplication::translate("Assets", "Union Node", nullptr));
+#if QT_CONFIG(tooltip)
+        intersectionNode->setToolTip(QCoreApplication::translate("Assets", "\n"
+"									<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"									<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"									p, li { white-space: pre-wrap; }\n"
+"									</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#5500ff;\">Callback #01</span></p>\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:italic; color:#aa00ff;\">Create Eurographics 1996 Bear</span></p></body></html>\n"
+"								", nullptr));
+#endif // QT_CONFIG(tooltip)
+        intersectionNode->setText(QCoreApplication::translate("Assets", "Intersection Node", nullptr));
+#if QT_CONFIG(tooltip)
+        differenceNode->setToolTip(QCoreApplication::translate("Assets", "\n"
+"									<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"									<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"									p, li { white-space: pre-wrap; }\n"
+"									</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#5500ff;\">Callback #01</span></p>\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:italic; color:#aa00ff;\">Create Eurographics 1996 Bear</span></p></body></html>\n"
+"								", nullptr));
+#endif // QT_CONFIG(tooltip)
+        differenceNode->setText(QCoreApplication::translate("Assets", "Difference Node", nullptr));
         Parameters_groupBox->setTitle(QString());
         groupBox_4->setTitle(QCoreApplication::translate("Assets", " Statistics", nullptr));
         label_2->setText(QCoreApplication::translate("Assets", "Vertex", nullptr));

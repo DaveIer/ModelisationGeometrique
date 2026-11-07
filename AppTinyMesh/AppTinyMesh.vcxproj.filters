@@ -53,6 +53,21 @@
     <ClCompile Include="Source\Adapters\NodeFieldAdapter.cpp">
       <Filter>Source\Adapters</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SDF\CapsuleNode.cpp">
+      <Filter>Source\SDF</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SDF\BinaryNode.cpp">
+      <Filter>Source\SDF</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SDF\UnionNode.cpp">
+      <Filter>Source\SDF</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SDF\IntersectionNode.cpp">
+      <Filter>Source\SDF</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SDF\DifferenceNode.cpp">
+      <Filter>Source\SDF</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Include\qte.h">
@@ -142,6 +157,21 @@
     </ClInclude>
     <ClInclude Include="Include\Adapters\NodeFieldAdapter.h">
       <Filter>Include\Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDF\CapsuleNode.h">
+      <Filter>Include\SDF</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDF\BinaryNode.h">
+      <Filter>Include\SDF</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDF\UnionNode.h">
+      <Filter>Include\SDF</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDF\IntersectionNode.h">
+      <Filter>Include\SDF</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDF\DifferenceNode.h">
+      <Filter>Include\SDF</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

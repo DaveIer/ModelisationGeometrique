@@ -1,0 +1,7 @@
+#include "SDF/UnionNode.h"
+
+UnionNode::UnionNode(std::unique_ptr<Node> left, std::unique_ptr<Node> right) : BinaryNode(std::move(left), std::move(right)) {}
+
+double UnionNode::Value(const Vector& p) const {
+	return std::min(left_->Value(p), right_->Value(p));
+}

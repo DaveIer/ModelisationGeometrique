@@ -3,7 +3,15 @@
 #include "ui_interface.h"
 #include "SDF/SphereNode.h"
 #include "SDF/BoxNode.h"
+#include "SDF/TorusNode.h"
+#include "SDF/CapsuleNode.h"
+#include "SDF/UnionNode.h"
+#include "SDF/IntersectionNode.h"
+#include "SDF/DifferenceNode.h"
 #include "Adapters/NodeFieldAdapter.h"
+
+//#include <memory>
+//#include <utility>
 
 MainWindow::MainWindow() : QMainWindow(), uiw(new Ui::Assets)
 {
@@ -33,8 +41,13 @@ void MainWindow::CreateActions()
 	// Buttons
 	connect(uiw->boxMesh, SIGNAL(clicked()), this, SLOT(BoxMeshExample()));
 	connect(uiw->sphereImplicit, SIGNAL(clicked()), this, SLOT(SphereImplicitExample()));
-	connect(uiw->sphereNode, SIGNAL(clicked()), this, SLOT(SphereNodeExample()));
-	connect(uiw->boxNode, SIGNAL(clicked()), this, SLOT(BoxNodeExample()));
+	connect(uiw->sphereNode, SIGNAL(clicked()), this, SLOT(SphereNodeExample())); // SphereNode
+	connect(uiw->boxNode, SIGNAL(clicked()), this, SLOT(BoxNodeExample())); // BoxNode
+	connect(uiw->torusNode, SIGNAL(clicked()), this, SLOT(TorusNodeExample())); // TorusNode
+	connect(uiw->capsuleNode, SIGNAL(clicked()), this, SLOT(CapsuleNodeExample())); // CapsuleNode
+	connect(uiw->unionNode, SIGNAL(clicked()), this, SLOT(UnionNodeExample())); // UnionNode
+	connect(uiw->intersectionNode, SIGNAL(clicked()), this, SLOT(IntersectionNodeExample())); // IntersectionNode
+	connect(uiw->differenceNode, SIGNAL(clicked()), this, SLOT(DifferenceNodeExample())); // DifferenceNode
 	connect(uiw->resetcameraButton, SIGNAL(clicked()), this, SLOT(ResetCamera()));
 	connect(uiw->wireframe, SIGNAL(clicked()), this, SLOT(UpdateMaterial()));
 	connect(uiw->radioShadingButton_1, SIGNAL(clicked()), this, SLOT(UpdateMaterial()));
@@ -80,6 +93,9 @@ void MainWindow::SphereImplicitExample()
 	UpdateGeometry();
 }
 
+// Imene - EXAMPLES
+
+// SphereNode
 void MainWindow::SphereNodeExample()
 {
 	SphereNode sphere(Vector(1.0, 1.0, 1.0), 2.0);
@@ -97,13 +113,123 @@ void MainWindow::SphereNodeExample()
 	UpdateGeometry();
 }
 
+// BoxNode
 void MainWindow::BoxNodeExample()
 {
 	BoxNode box(Vector(-1.0, -1.0, -1.0), Vector(1.0, 1.0, 1.0));
 	NodeFieldAdapter implicit(box);
 
 	Mesh implicitMesh;
-	implicit.Polygonize(31, implicitMesh, Box(5.0));
+	implicit.Polygonize(32, implicitMesh, Box(5.0));
+
+	std::vector<Color> cols;
+	cols.resize(implicitMesh.Vertexes());
+	for (size_t i = 0; i < cols.size(); i++)
+		cols[i] = Color(0.8, 0.8, 0.8);
+
+	meshColor = MeshColor(implicitMesh, cols, implicitMesh.VertexIndexes());
+	UpdateGeometry();
+}
+
+// TorusNode
+void MainWindow::TorusNodeExample()
+{
+	TorusNode torus(Vector(0.0, 0.0, 0.0), 2.0, 0.5);
+	NodeFieldAdapter implicit(torus);
+
+	Mesh implicitMesh;
+	implicit.Polygonize(64, implicitMesh, Box(3.0));
+
+	std::vector<Color> cols;
+	cols.resize(implicitMesh.Vertexes());
+	for (size_t i = 0; i < cols.size(); i++)
+		cols[i] = Color(0.8, 0.8, 0.8);
+
+	meshColor = MeshColor(implicitMesh, cols, implicitMesh.VertexIndexes());
+	UpdateGeometry();
+}
+
+// CapsuleNode
+void MainWindow::CapsuleNodeExample()
+{
+	CapsuleNode capsule(Vector(-1.0, 0.0, 0.0), Vector(1.0, 0.0, 0.0), 0.5);
+	NodeFieldAdapter implicit(capsule);
+
+	Mesh implicitMesh;
+	implicit.Polygonize(64, implicitMesh, Box(2.0));
+
+	std::vector<Color> cols;
+	cols.resize(implicitMesh.Vertexes());
+	for (size_t i = 0; i < cols.size(); i++)
+		cols[i] = Color(0.8, 0.8, 0.8);
+
+	meshColor = MeshColor(implicitMesh, cols, implicitMesh.VertexIndexes());
+	UpdateGeometry();
+}
+
+// UnionNode
+void MainWindow::UnionNodeExample()
+{
+	auto sphere = std::make_unique<SphereNode>(Vector(-0.4, 0.0, 0.0), 1.0);
+	auto box = std::make_unique<BoxNode>(Vector(0.0, -0.55, -0.55), Vector(1.6, 0.55, 0.55));
+	//auto capsule = std::make_unique<CapsuleNode>(Vector(0.0, 0.0, 0.0), Vector(1.0, 1.0, 1.0), 0.2);
+	//auto torus = std::make_unique<TorusNode>(Vector(0.0, 0.0, 0.0), 1.0, 0.2);
+	
+	//auto unionSphereBox = std::make_unique<UnionNode>(std::move(sphere), std::move(box));
+	//auto unionTorusCapsule = std::make_unique<UnionNode>(std::move(capsule), std::move(torus));
+
+	//UnionNode unionNode(std::move(unionSphereBox), std::move(unionTorusCapsule));
+	
+	UnionNode unionNode(std::move(sphere), std::move(box));
+	
+	NodeFieldAdapter implicit(unionNode);
+
+	Mesh implicitMesh;
+	implicit.Polygonize(64, implicitMesh, Box(2.5));
+
+	std::vector<Color> cols;
+	cols.resize(implicitMesh.Vertexes());
+	for (size_t i = 0; i < cols.size(); i++)
+		cols[i] = Color(0.8, 0.8, 0.8);
+
+	meshColor = MeshColor(implicitMesh, cols, implicitMesh.VertexIndexes());
+	UpdateGeometry();
+}
+
+// IntersectionNode
+void MainWindow::IntersectionNodeExample()
+{
+	auto sphere = std::make_unique<SphereNode>(Vector(-0.4, 0.0, 0.0), 1.0);
+	auto box = std::make_unique<BoxNode>(Vector(0.0, -0.55, -0.55), Vector(1.6, 0.55, 0.55));
+
+	IntersectionNode intersectionNode(std::move(sphere), std::move(box));
+
+	NodeFieldAdapter implicit(intersectionNode);
+
+	Mesh implicitMesh;
+	implicit.Polygonize(64, implicitMesh, Box(2.5));
+
+	std::vector<Color> cols;
+	cols.resize(implicitMesh.Vertexes());
+	for (size_t i = 0; i < cols.size(); i++)
+		cols[i] = Color(0.8, 0.8, 0.8);
+
+	meshColor = MeshColor(implicitMesh, cols, implicitMesh.VertexIndexes());
+	UpdateGeometry();
+}
+
+// DifferenceNode
+void MainWindow::DifferenceNodeExample()
+{
+	auto sphere = std::make_unique<SphereNode>(Vector(1.0, 0.0, 0.0), 0.75);
+	auto box = std::make_unique<BoxNode>(Vector(-1.0, -1.0, -1.0), Vector(1.0, 1.0, 1.0));
+
+	DifferenceNode differenceNode(std::move(sphere), std::move(box));
+
+	NodeFieldAdapter implicit(differenceNode);
+
+	Mesh implicitMesh;
+	implicit.Polygonize(64, implicitMesh, Box(2.5));
 
 	std::vector<Color> cols;
 	cols.resize(implicitMesh.Vertexes());

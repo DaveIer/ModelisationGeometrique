@@ -1,11 +1,12 @@
 #include "SDF/TorusNode.h"
 
-TorusNode::TorusNode() {}
+TorusNode::TorusNode(double R, double r) : center_(0.0, 0.0, 0.0), R_(R), r_(r) {}
 
-TorusNode::TorusNode(const TorusNode& Torus) {
-    
-}
+TorusNode::TorusNode(const Vector& center, double R, double r) : center_(center), R_(R), r_(r) {}
 
 double TorusNode::Value(const Vector& p) const {
-    return 0.;
+	const Vector& q = p - center_;
+	const double dist_to_center = sqrt(q[0] * q[0] + q[1] * q[1]) - R_;
+
+	return std::sqrt(dist_to_center * dist_to_center + q[2] * q[2]) - r_;
 }
