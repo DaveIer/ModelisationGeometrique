@@ -43,6 +43,8 @@ public slots:
 	void UnionNodeExample();
 	void IntersectionNodeExample();
 	void DifferenceNodeExample();
+	void TranslationNodeExample();
+	void RotationNodeExample();
 	
 	// smooth union examples
 	void SmoothUnionPolynomialNodeExample();

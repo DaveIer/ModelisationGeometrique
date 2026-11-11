@@ -74,6 +74,15 @@
     <ClCompile Include="Source\SDF\SmoothUnionPolynomialNode.cpp">
       <Filter>Source\SDF</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SDF\UnaryNode.cpp">
+      <Filter>Source\SDF</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SDF\RotationNode.cpp">
+      <Filter>Source\SDF</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SDF\TranslationNode.cpp">
+      <Filter>Source\SDF</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Include\qte.h">
@@ -183,6 +192,15 @@
       <Filter>Include\SDF</Filter>
     </ClInclude>
     <ClInclude Include="Include\SDF\SmoothUnionPolynomialNode.h">
+      <Filter>Include\SDF</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDF\UnaryNode.h">
+      <Filter>Include\SDF</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDF\RotationNode.h">
+      <Filter>Include\SDF</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDF\TranslationNode.h">
       <Filter>Include\SDF</Filter>
     </ClInclude>
   </ItemGroup>

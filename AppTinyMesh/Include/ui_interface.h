@@ -53,6 +53,8 @@ public:
     QPushButton *blendExpNode;
     QPushButton *intersectionNode;
     QPushButton *differenceNode;
+    QPushButton *translationNode;
+    QPushButton *rotationNode;
     QWidget *widget_GL;
     QGroupBox *Parameters_groupBox;
     QGroupBox *groupBox_4;
@@ -156,6 +158,14 @@ public:
         differenceNode->setObjectName("differenceNode");
         differenceNode->setGeometry(QRect(20, 320, 101, 23));
         differenceNode->setCheckable(false);
+        translationNode = new QPushButton(Objects_groupBox);
+        translationNode->setObjectName("translationNode");
+        translationNode->setGeometry(QRect(140, 80, 101, 23));
+        translationNode->setCheckable(false);
+        rotationNode = new QPushButton(Objects_groupBox);
+        rotationNode->setObjectName("rotationNode");
+        rotationNode->setGeometry(QRect(140, 110, 101, 23));
+        rotationNode->setCheckable(false);
 
         hboxLayout->addWidget(Objects_groupBox);
 
@@ -366,6 +376,28 @@ public:
 "								", nullptr));
 #endif // QT_CONFIG(tooltip)
         differenceNode->setText(QCoreApplication::translate("Assets", "Difference Node", nullptr));
+#if QT_CONFIG(tooltip)
+        translationNode->setToolTip(QCoreApplication::translate("Assets", "\n"
+"									<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"									<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"									p, li { white-space: pre-wrap; }\n"
+"									</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#5500ff;\">Callback #01</span></p>\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:italic; color:#aa00ff;\">Create Eurographics 1996 Bear</span></p></body></html>\n"
+"								", nullptr));
+#endif // QT_CONFIG(tooltip)
+        translationNode->setText(QCoreApplication::translate("Assets", "Translation Node", nullptr));
+#if QT_CONFIG(tooltip)
+        rotationNode->setToolTip(QCoreApplication::translate("Assets", "\n"
+"									<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"									<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"									p, li { white-space: pre-wrap; }\n"
+"									</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#5500ff;\">Callback #01</span></p>\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:italic; color:#aa00ff;\">Create Eurographics 1996 Bear</span></p></body></html>\n"
+"								", nullptr));
+#endif // QT_CONFIG(tooltip)
+        rotationNode->setText(QCoreApplication::translate("Assets", "Rotation Node", nullptr));
         Parameters_groupBox->setTitle(QString());
         groupBox_4->setTitle(QCoreApplication::translate("Assets", " Statistics", nullptr));
         label_2->setText(QCoreApplication::translate("Assets", "Vertex", nullptr));

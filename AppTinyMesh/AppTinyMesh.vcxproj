@@ -120,10 +120,13 @@
     <ClCompile Include="Source\SDF\CapsuleNode.cpp" />
     <ClCompile Include="Source\SDF\DifferenceNode.cpp" />
     <ClCompile Include="Source\SDF\IntersectionNode.cpp" />
+    <ClCompile Include="Source\SDF\RotationNode.cpp" />
     <ClCompile Include="Source\SDF\SmoothUnionExpNode.cpp" />
     <ClCompile Include="Source\SDF\SmoothUnionPolynomialNode.cpp" />
     <ClCompile Include="Source\SDF\SphereNode.cpp" />
     <ClCompile Include="Source\SDF\TorusNode.cpp" />
+    <ClCompile Include="Source\SDF\TranslationNode.cpp" />
+    <ClCompile Include="Source\SDF\UnaryNode.cpp" />
     <ClCompile Include="Source\SDF\UnionNode.cpp" />
     <ClCompile Include="Source\shader-api.cpp" />
     <ClCompile Include="Source\triangle.cpp" />
@@ -182,10 +185,13 @@
     <ClInclude Include="Include\SDF\DifferenceNode.h" />
     <ClInclude Include="Include\SDF\IntersectionNode.h" />
     <ClInclude Include="Include\SDF\Node.h" />
+    <ClInclude Include="Include\SDF\RotationNode.h" />
     <ClInclude Include="Include\SDF\SmoothUnionExpNode.h" />
     <ClInclude Include="Include\SDF\SmoothUnionPolynomialNode.h" />
     <ClInclude Include="Include\SDF\SphereNode.h" />
     <ClInclude Include="Include\SDF\TorusNode.h" />
+    <ClInclude Include="Include\SDF\TranslationNode.h" />
+    <ClInclude Include="Include\SDF\UnaryNode.h" />
     <ClInclude Include="Include\SDF\UnionNode.h" />
     <ClInclude Include="Include\shader-api.h" />
   </ItemGroup>

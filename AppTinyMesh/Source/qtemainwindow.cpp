@@ -1,16 +1,21 @@
 #include "qte.h"
 #include "implicits.h"
 #include "ui_interface.h"
+
 #include "SDF/SphereNode.h"
 #include "SDF/BoxNode.h"
 #include "SDF/TorusNode.h"
 #include "SDF/CapsuleNode.h"
+
 #include "SDF/UnionNode.h"
 #include "SDF/SmoothUnionPolynomialNode.h"
 #include "SDF/SmoothUnionExpNode.h"
+
 #include "SDF/IntersectionNode.h"
 #include "SDF/DifferenceNode.h"
 #include "Adapters/NodeFieldAdapter.h"
+#include "SDF/TranslationNode.h"
+#include "SDF/RotationNode.h"
 
 //#include <memory>
 //#include <utility>
@@ -52,6 +57,8 @@ void MainWindow::CreateActions()
 	connect(uiw->blendExpNode, SIGNAL(clicked()), this, SLOT(SmoothUnionExpNodeExample())); // SmoothUnionExpNode
 	connect(uiw->intersectionNode, SIGNAL(clicked()), this, SLOT(IntersectionNodeExample())); // IntersectionNode
 	connect(uiw->differenceNode, SIGNAL(clicked()), this, SLOT(DifferenceNodeExample())); // DifferenceNode
+	connect(uiw->translationNode, SIGNAL(clicked()), this, SLOT(TranslationNodeExample())); // TranslationNode
+	connect(uiw->rotationNode, SIGNAL(clicked()), this, SLOT(RotationNodeExample())); // RotationNode)
 	connect(uiw->resetcameraButton, SIGNAL(clicked()), this, SLOT(ResetCamera()));
 	connect(uiw->wireframe, SIGNAL(clicked()), this, SLOT(UpdateMaterial()));
 	connect(uiw->radioShadingButton_1, SIGNAL(clicked()), this, SLOT(UpdateMaterial()));
@@ -99,14 +106,16 @@ void MainWindow::SphereImplicitExample()
 
 // Imene - EXAMPLES
 
-// SphereNode
+/* -------- - Primitives examples-------- */
+
+// Sphere Node
 void MainWindow::SphereNodeExample()
 {
-	SphereNode sphere(Vector(1.0, 1.0, 1.0), 2.0);
+	SphereNode sphere(Vector(0.0, 0.0, 0.0), 1.0);
 	NodeFieldAdapter implicit(sphere);
 
 	Mesh implicitMesh;
-	implicit.Polygonize(31, implicitMesh, Box(3.0));
+	implicit.Polygonize(128, implicitMesh, Box(2.0));
 
 	std::vector<Color> cols;
 	cols.resize(implicitMesh.Vertexes());
@@ -117,14 +126,14 @@ void MainWindow::SphereNodeExample()
 	UpdateGeometry();
 }
 
-// BoxNode
+// Box Node
 void MainWindow::BoxNodeExample()
 {
 	BoxNode box(Vector(-1.0, -1.0, -1.0), Vector(1.0, 1.0, 1.0));
 	NodeFieldAdapter implicit(box);
 
 	Mesh implicitMesh;
-	implicit.Polygonize(32, implicitMesh, Box(5.0));
+	implicit.Polygonize(128, implicitMesh, Box(2.0));
 
 	std::vector<Color> cols;
 	cols.resize(implicitMesh.Vertexes());
@@ -135,14 +144,14 @@ void MainWindow::BoxNodeExample()
 	UpdateGeometry();
 }
 
-// TorusNode
+// Torus Node
 void MainWindow::TorusNodeExample()
 {
-	TorusNode torus(Vector(0.0, 0.0, 0.0), 2.0, 0.5);
+	TorusNode torus(Vector(0.0, 0.0, 0.0), 1.0, 0.35);
 	NodeFieldAdapter implicit(torus);
 
 	Mesh implicitMesh;
-	implicit.Polygonize(64, implicitMesh, Box(3.0));
+	implicit.Polygonize(32, implicitMesh, Box(2.2));
 
 	std::vector<Color> cols;
 	cols.resize(implicitMesh.Vertexes());
@@ -160,7 +169,7 @@ void MainWindow::CapsuleNodeExample()
 	NodeFieldAdapter implicit(capsule);
 
 	Mesh implicitMesh;
-	implicit.Polygonize(64, implicitMesh, Box(2.0));
+	implicit.Polygonize(128, implicitMesh, Box(2.0));
 
 	std::vector<Color> cols;
 	cols.resize(implicitMesh.Vertexes());
@@ -171,7 +180,9 @@ void MainWindow::CapsuleNodeExample()
 	UpdateGeometry();
 }
 
-// UnionNode
+/* -------- Boolean operations examples -------- */
+
+// Union Node
 void MainWindow::UnionNodeExample()
 {
 	auto sphere = std::make_unique<SphereNode>(Vector(-0.4, 0.0, 0.0), 1.0);
@@ -200,13 +211,13 @@ void MainWindow::UnionNodeExample()
 	UpdateGeometry();
 }
 
-// SmoothUnionPolynomialNode
+// Smooth Union Polynomial Node
 void MainWindow::SmoothUnionPolynomialNodeExample()
 {
 	auto sphere = std::make_unique<SphereNode>(Vector(-0.4, 0.0, 0.0), 1.0);
 	auto box = std::make_unique<BoxNode>(Vector(0.0, -0.55, -0.55), Vector(1.6, 0.55, 0.55));
 
-	SmoothUnionPolynomialNode blendNode(std::move(sphere), std::move(box), 0.8);
+	SmoothUnionPolynomialNode blendNode(std::move(sphere), std::move(box), 1.2);
 
 	NodeFieldAdapter implicit(blendNode);
 
@@ -222,13 +233,13 @@ void MainWindow::SmoothUnionPolynomialNodeExample()
 	UpdateGeometry();
 }
 
-// SmoothUnionExpNode
+// Smooth Union Exp Node
 void MainWindow::SmoothUnionExpNodeExample()
 {
 	auto sphere = std::make_unique<SphereNode>(Vector(-0.4, 0.0, 0.0), 1.0);
 	auto box = std::make_unique<BoxNode>(Vector(0.0, -0.55, -0.55), Vector(1.6, 0.55, 0.55));
 
-	SmoothUnionExpNode blendNode(std::move(sphere), std::move(box), 0.8);
+	SmoothUnionExpNode blendNode(std::move(sphere), std::move(box), 1.2);
 
 	NodeFieldAdapter implicit(blendNode);
 
@@ -244,10 +255,10 @@ void MainWindow::SmoothUnionExpNodeExample()
 	UpdateGeometry();
 }
 
-// IntersectionNode
+// Intersection Node
 void MainWindow::IntersectionNodeExample()
 {
-	auto sphere = std::make_unique<SphereNode>(Vector(-0.4, 0.0, 0.0), 0.4);
+	auto sphere = std::make_unique<SphereNode>(Vector(-0.4, 0.0, 0.0), 1.0);
 	auto box = std::make_unique<BoxNode>(Vector(0.0, -0.55, -0.55), Vector(1.6, 0.55, 0.55));
 
 	IntersectionNode intersectionNode(std::move(sphere), std::move(box));
@@ -266,15 +277,57 @@ void MainWindow::IntersectionNodeExample()
 	UpdateGeometry();
 }
 
-// DifferenceNode
+// Difference Node
 void MainWindow::DifferenceNodeExample()
 {
-	auto sphere = std::make_unique<SphereNode>(Vector(1.0, 0.0, 0.0), 0.75);
-	auto box = std::make_unique<BoxNode>(Vector(-1.0, -1.0, -1.0), Vector(1.0, 1.0, 1.0));
+	auto sphere = std::make_unique<SphereNode>(Vector(1.0, 0.0, 0.0), 1.0);
+	auto box = std::make_unique<BoxNode>(Vector(0.0, -0.55, -0.55), Vector(1.6, 0.55, 0.55));
 
-	DifferenceNode differenceNode(std::move(sphere), std::move(box));
+	DifferenceNode differenceNode(std::move(box), std::move(sphere));
 
 	NodeFieldAdapter implicit(differenceNode);
+
+	Mesh implicitMesh;
+	implicit.Polygonize(64, implicitMesh, Box(2.5));
+
+	std::vector<Color> cols;
+	cols.resize(implicitMesh.Vertexes());
+	for (size_t i = 0; i < cols.size(); i++)
+		cols[i] = Color(0.8, 0.8, 0.8);
+
+	meshColor = MeshColor(implicitMesh, cols, implicitMesh.VertexIndexes());
+	UpdateGeometry();
+}
+
+// Translation Node
+void MainWindow::TranslationNodeExample()
+{
+	auto box = std::make_unique<BoxNode>(Vector(-0.8, -0.3, -0.3), Vector(0.8, 0.3, 0.3));
+
+	TranslationNode translated(std::move(box), Vector(1.0, 0.0, 0.0));
+
+	NodeFieldAdapter implicit(translated);
+
+	Mesh implicitMesh;
+	implicit.Polygonize(64, implicitMesh, Box(2.5));
+
+	std::vector<Color> cols;
+	cols.resize(implicitMesh.Vertexes());
+	for (size_t i = 0; i < cols.size(); i++)
+		cols[i] = Color(0.8, 0.8, 0.8);
+
+	meshColor = MeshColor(implicitMesh, cols, implicitMesh.VertexIndexes());
+	UpdateGeometry();
+}
+
+// Rotation Node
+void MainWindow::RotationNodeExample()
+{
+	auto box = std::make_unique<BoxNode>(Vector(-0.8, -0.3, -0.3), Vector(0.8, 0.3, 0.3));
+
+	RotationNode rotated(std::move(box), Vector(0.0, 0.0, 1.0), Math::DegreeToRadian(45.0));
+
+	NodeFieldAdapter implicit(rotated);
 
 	Mesh implicitMesh;
 	implicit.Polygonize(64, implicitMesh, Box(2.5));
