@@ -49,6 +49,8 @@ public:
     QPushButton *torusNode;
     QPushButton *capsuleNode;
     QPushButton *unionNode;
+    QPushButton *blendPolyNode;
+    QPushButton *blendExpNode;
     QPushButton *intersectionNode;
     QPushButton *differenceNode;
     QWidget *widget_GL;
@@ -138,13 +140,21 @@ public:
         unionNode->setObjectName("unionNode");
         unionNode->setGeometry(QRect(20, 200, 101, 23));
         unionNode->setCheckable(false);
+        blendPolyNode = new QPushButton(Objects_groupBox);
+        blendPolyNode->setObjectName("blendPolyNode");
+        blendPolyNode->setGeometry(QRect(20, 230, 101, 23));
+        blendPolyNode->setCheckable(false);
+        blendExpNode = new QPushButton(Objects_groupBox);
+        blendExpNode->setObjectName("blendExpNode");
+        blendExpNode->setGeometry(QRect(20, 260, 101, 23));
+        blendExpNode->setCheckable(false);
         intersectionNode = new QPushButton(Objects_groupBox);
         intersectionNode->setObjectName("intersectionNode");
-        intersectionNode->setGeometry(QRect(20, 230, 101, 23));
+        intersectionNode->setGeometry(QRect(20, 290, 101, 23));
         intersectionNode->setCheckable(false);
         differenceNode = new QPushButton(Objects_groupBox);
         differenceNode->setObjectName("differenceNode");
-        differenceNode->setGeometry(QRect(20, 260, 101, 23));
+        differenceNode->setGeometry(QRect(20, 320, 101, 23));
         differenceNode->setCheckable(false);
 
         hboxLayout->addWidget(Objects_groupBox);
@@ -312,6 +322,28 @@ public:
 "								", nullptr));
 #endif // QT_CONFIG(tooltip)
         unionNode->setText(QCoreApplication::translate("Assets", "Union Node", nullptr));
+#if QT_CONFIG(tooltip)
+        blendPolyNode->setToolTip(QCoreApplication::translate("Assets", "\n"
+"									<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"									<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"									p, li { white-space: pre-wrap; }\n"
+"									</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#5500ff;\">Callback #01</span></p>\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:italic; color:#aa00ff;\">Create Eurographics 1996 Bear</span></p></body></html>\n"
+"								", nullptr));
+#endif // QT_CONFIG(tooltip)
+        blendPolyNode->setText(QCoreApplication::translate("Assets", "Blend Polynomial Node", nullptr));
+#if QT_CONFIG(tooltip)
+        blendExpNode->setToolTip(QCoreApplication::translate("Assets", "\n"
+"									<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"									<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"									p, li { white-space: pre-wrap; }\n"
+"									</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#5500ff;\">Callback #01</span></p>\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:italic; color:#aa00ff;\">Create Eurographics 1996 Bear</span></p></body></html>\n"
+"								", nullptr));
+#endif // QT_CONFIG(tooltip)
+        blendExpNode->setText(QCoreApplication::translate("Assets", "Blend Exp Node", nullptr));
 #if QT_CONFIG(tooltip)
         intersectionNode->setToolTip(QCoreApplication::translate("Assets", "\n"
 "									<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"

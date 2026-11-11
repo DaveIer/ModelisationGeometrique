@@ -43,7 +43,10 @@ public slots:
 	void UnionNodeExample();
 	void IntersectionNodeExample();
 	void DifferenceNodeExample();
-
+	
+	// smooth union examples
+	void SmoothUnionPolynomialNodeExample();
+	void SmoothUnionExpNodeExample();
 };
 
 #endif

@@ -68,6 +68,12 @@
     <ClCompile Include="Source\SDF\DifferenceNode.cpp">
       <Filter>Source\SDF</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SDF\SmoothUnionExpNode.cpp">
+      <Filter>Source\SDF</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SDF\SmoothUnionPolynomialNode.cpp">
+      <Filter>Source\SDF</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Include\qte.h">
@@ -171,6 +177,12 @@
       <Filter>Include\SDF</Filter>
     </ClInclude>
     <ClInclude Include="Include\SDF\DifferenceNode.h">
+      <Filter>Include\SDF</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDF\SmoothUnionExpNode.h">
+      <Filter>Include\SDF</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDF\SmoothUnionPolynomialNode.h">
       <Filter>Include\SDF</Filter>
     </ClInclude>
   </ItemGroup>

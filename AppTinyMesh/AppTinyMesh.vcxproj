@@ -120,6 +120,8 @@
     <ClCompile Include="Source\SDF\CapsuleNode.cpp" />
     <ClCompile Include="Source\SDF\DifferenceNode.cpp" />
     <ClCompile Include="Source\SDF\IntersectionNode.cpp" />
+    <ClCompile Include="Source\SDF\SmoothUnionExpNode.cpp" />
+    <ClCompile Include="Source\SDF\SmoothUnionPolynomialNode.cpp" />
     <ClCompile Include="Source\SDF\SphereNode.cpp" />
     <ClCompile Include="Source\SDF\TorusNode.cpp" />
     <ClCompile Include="Source\SDF\UnionNode.cpp" />
@@ -180,6 +182,8 @@
     <ClInclude Include="Include\SDF\DifferenceNode.h" />
     <ClInclude Include="Include\SDF\IntersectionNode.h" />
     <ClInclude Include="Include\SDF\Node.h" />
+    <ClInclude Include="Include\SDF\SmoothUnionExpNode.h" />
+    <ClInclude Include="Include\SDF\SmoothUnionPolynomialNode.h" />
     <ClInclude Include="Include\SDF\SphereNode.h" />
     <ClInclude Include="Include\SDF\TorusNode.h" />
     <ClInclude Include="Include\SDF\UnionNode.h" />

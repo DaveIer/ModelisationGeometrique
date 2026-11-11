@@ -6,6 +6,8 @@
 #include "SDF/TorusNode.h"
 #include "SDF/CapsuleNode.h"
 #include "SDF/UnionNode.h"
+#include "SDF/SmoothUnionPolynomialNode.h"
+#include "SDF/SmoothUnionExpNode.h"
 #include "SDF/IntersectionNode.h"
 #include "SDF/DifferenceNode.h"
 #include "Adapters/NodeFieldAdapter.h"
@@ -46,6 +48,8 @@ void MainWindow::CreateActions()
 	connect(uiw->torusNode, SIGNAL(clicked()), this, SLOT(TorusNodeExample())); // TorusNode
 	connect(uiw->capsuleNode, SIGNAL(clicked()), this, SLOT(CapsuleNodeExample())); // CapsuleNode
 	connect(uiw->unionNode, SIGNAL(clicked()), this, SLOT(UnionNodeExample())); // UnionNode
+	connect(uiw->blendPolyNode, SIGNAL(clicked()), this, SLOT(SmoothUnionPolynomialNodeExample())); // SmoothUnionPolynomialNode
+	connect(uiw->blendExpNode, SIGNAL(clicked()), this, SLOT(SmoothUnionExpNodeExample())); // SmoothUnionExpNode
 	connect(uiw->intersectionNode, SIGNAL(clicked()), this, SLOT(IntersectionNodeExample())); // IntersectionNode
 	connect(uiw->differenceNode, SIGNAL(clicked()), this, SLOT(DifferenceNodeExample())); // DifferenceNode
 	connect(uiw->resetcameraButton, SIGNAL(clicked()), this, SLOT(ResetCamera()));
@@ -196,10 +200,54 @@ void MainWindow::UnionNodeExample()
 	UpdateGeometry();
 }
 
+// SmoothUnionPolynomialNode
+void MainWindow::SmoothUnionPolynomialNodeExample()
+{
+	auto sphere = std::make_unique<SphereNode>(Vector(-0.4, 0.0, 0.0), 1.0);
+	auto box = std::make_unique<BoxNode>(Vector(0.0, -0.55, -0.55), Vector(1.6, 0.55, 0.55));
+
+	SmoothUnionPolynomialNode blendNode(std::move(sphere), std::move(box), 0.8);
+
+	NodeFieldAdapter implicit(blendNode);
+
+	Mesh implicitMesh;
+	implicit.Polygonize(64, implicitMesh, Box(2.5));
+
+	std::vector<Color> cols;
+	cols.resize(implicitMesh.Vertexes());
+	for (size_t i = 0; i < cols.size(); i++)
+		cols[i] = Color(0.8, 0.8, 0.8);
+
+	meshColor = MeshColor(implicitMesh, cols, implicitMesh.VertexIndexes());
+	UpdateGeometry();
+}
+
+// SmoothUnionExpNode
+void MainWindow::SmoothUnionExpNodeExample()
+{
+	auto sphere = std::make_unique<SphereNode>(Vector(-0.4, 0.0, 0.0), 1.0);
+	auto box = std::make_unique<BoxNode>(Vector(0.0, -0.55, -0.55), Vector(1.6, 0.55, 0.55));
+
+	SmoothUnionExpNode blendNode(std::move(sphere), std::move(box), 0.8);
+
+	NodeFieldAdapter implicit(blendNode);
+
+	Mesh implicitMesh;
+	implicit.Polygonize(64, implicitMesh, Box(2.5));
+
+	std::vector<Color> cols;
+	cols.resize(implicitMesh.Vertexes());
+	for (size_t i = 0; i < cols.size(); i++)
+		cols[i] = Color(0.8, 0.8, 0.8);
+
+	meshColor = MeshColor(implicitMesh, cols, implicitMesh.VertexIndexes());
+	UpdateGeometry();
+}
+
 // IntersectionNode
 void MainWindow::IntersectionNodeExample()
 {
-	auto sphere = std::make_unique<SphereNode>(Vector(-0.4, 0.0, 0.0), 1.0);
+	auto sphere = std::make_unique<SphereNode>(Vector(-0.4, 0.0, 0.0), 0.4);
 	auto box = std::make_unique<BoxNode>(Vector(0.0, -0.55, -0.55), Vector(1.6, 0.55, 0.55));
 
 	IntersectionNode intersectionNode(std::move(sphere), std::move(box));
