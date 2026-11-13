@@ -8,6 +8,7 @@ public:
 	SmoothUnionPolynomialNode(std::unique_ptr<Node> left, std::unique_ptr<Node> right, double radius);
 
 	double Value(const Vector& p) const override;
+	double Lipschitz() const override;
 
 private:
 	double radius_; // Blend radius

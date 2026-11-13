@@ -10,3 +10,5 @@ double TranslationNode::Value(const Vector& p) const
 {
 	return child_->Value(p - translation_);
 }
+
+double TranslationNode::Lipschitz() const { return child_->Lipschitz(); }

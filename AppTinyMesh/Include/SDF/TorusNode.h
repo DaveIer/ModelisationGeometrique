@@ -13,6 +13,7 @@ public:
 
 	// override the Value function to compute the signed distance from a point to the torus
     double Value(const Vector& p) const;
+	double Lipschitz() const override;
 
 private:
     Vector center_;

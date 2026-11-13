@@ -10,3 +10,5 @@ double TorusNode::Value(const Vector& p) const {
 
 	return std::sqrt(dist_to_center * dist_to_center + q[2] * q[2]) - r_;
 }
+
+double TorusNode::Lipschitz() const { return 1.0; }

@@ -13,3 +13,5 @@ double BoxNode::Value(const Vector& p) const {
 
     return out + in;
 }
+
+double BoxNode::Lipschitz() const { return 1.0; } // Exact SDF

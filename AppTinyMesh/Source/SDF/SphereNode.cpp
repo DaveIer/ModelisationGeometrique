@@ -12,3 +12,5 @@ SphereNode::SphereNode(const SphereNode& sphere) {
 double SphereNode::Value(const Vector& p) const {
     return Norm(p - this->center_) - this->r_;
 }
+
+double SphereNode::Lipschitz() const { return 1.0; } // Exact SDF

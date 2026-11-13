@@ -12,6 +12,7 @@ public:
 
 	// override the Value function to compute the signed distance from a point to the box
     double Value(const Vector& p) const override;
+    double Lipschitz() const override;
 
 private:
     Vector p_min_;

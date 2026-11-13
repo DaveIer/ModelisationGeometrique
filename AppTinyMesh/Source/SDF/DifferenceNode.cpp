@@ -5,3 +5,5 @@ DifferenceNode::DifferenceNode(std::unique_ptr<Node> left, std::unique_ptr<Node>
 double DifferenceNode::Value(const Vector& p) const {
 	return std::max(left_->Value(p), -right_->Value(p));
 }
+
+double DifferenceNode::Lipschitz() const { return std::max(left_->Lipschitz(), right_->Lipschitz()); }

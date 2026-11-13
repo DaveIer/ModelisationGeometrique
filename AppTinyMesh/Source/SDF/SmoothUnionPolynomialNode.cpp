@@ -21,3 +21,5 @@ double SmoothUnionPolynomialNode::Value(const Vector& p) const
 	
 	return std::min(a, b) - (radius_ / 6.0) * h * h * h;
 }
+
+double SmoothUnionPolynomialNode::Lipschitz() const { return std::max(left_->Lipschitz(), right_->Lipschitz()); }

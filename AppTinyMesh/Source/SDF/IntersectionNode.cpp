@@ -5,3 +5,5 @@ IntersectionNode::IntersectionNode(std::unique_ptr<Node> left, std::unique_ptr<N
 double IntersectionNode::Value(const Vector& p) const {
 	return std::max(left_->Value(p), right_->Value(p));
 }
+
+double IntersectionNode::Lipschitz() const { return std::max(left_->Lipschitz(), right_->Lipschitz()); }

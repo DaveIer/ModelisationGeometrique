@@ -6,6 +6,7 @@ class Node {
 public:
     Node() = default;
     virtual ~Node() = default;
-
+    
     virtual double Value(const Vector& p) const = 0;
+    virtual double Lipschitz() const = 0;
 };

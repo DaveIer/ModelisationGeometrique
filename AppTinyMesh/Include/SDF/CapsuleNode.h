@@ -11,6 +11,7 @@ public:
 	
 	// override the Value function to compute the signed distance from a point to the capsule
 	double Value(const Vector& p) const override;
+	double Lipschitz() const override;
 
 private:
 	Vector a_; // first endpoint of the capsule

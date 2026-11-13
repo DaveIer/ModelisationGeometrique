@@ -9,7 +9,7 @@ RotationNode::RotationNode(std::unique_ptr<Node> child, const Vector& axis, doub
 {
 	const double length = Norm(axis_);
 
-	if (!length > 0.0 || !std::isfinite(length) || !std::isfinite(angle))
+	if (!(length > 0.0) || !std::isfinite(length) || !std::isfinite(angle))
 		throw std::invalid_argument("Invalid axis or angle for rotation");
 
 	axis_ /= length; // normalize the axis
@@ -28,4 +28,6 @@ double RotationNode::Value(const Vector& p) const
 
 	return child_->Value(rotated + center_);
 }
+
+double RotationNode::Lipschitz() const { return child_->Lipschitz(); }
  

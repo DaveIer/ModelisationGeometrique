@@ -19,3 +19,5 @@ double CapsuleNode::Value(const Vector& p) const {
 
 	return Norm(p - closest_point) - r_;
 }
+
+double CapsuleNode::Lipschitz() const { return 1.0; } // Exact SDF
