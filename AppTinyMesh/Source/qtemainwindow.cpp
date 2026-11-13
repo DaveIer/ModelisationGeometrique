@@ -19,8 +19,8 @@
 
 #include "Scenes/ArchScene.h"
 
-//#include <memory>
-//#include <utility>
+#include <iostream>
+#include <chrono>
 
 MainWindow::MainWindow() : QMainWindow(), uiw(new Ui::Assets)
 {
@@ -351,7 +351,16 @@ void MainWindow::ArchSceneExample()
 	NodeFieldAdapter implicit(*arch);
 
 	Mesh implicitMesh;
-	implicit.Polygonize(156, implicitMesh, Box(3.5));
+
+	auto start = std::chrono::steady_clock::now();
+
+	implicit.Polygonize(96, implicitMesh, Box(Vector(-1.7, -0.8, -0.4), Vector(1.7, 0.8, 3.5)));
+
+	auto end = std::chrono::steady_clock::now();
+
+	std::chrono::duration<double> duration = end - start;
+
+	std::cout << "Polygonization time: " << duration.count() << " s\n";
 
 	std::vector<Color> cols;
 	cols.resize(implicitMesh.Vertexes());
