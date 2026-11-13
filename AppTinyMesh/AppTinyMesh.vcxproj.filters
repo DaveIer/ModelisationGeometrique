@@ -86,6 +86,9 @@
     <ClCompile Include="Source\Scenes\ArchScene.cpp">
       <Filter>Source\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Benchmarks\SDFBenchmark.cpp">
+      <Filter>Source\Benchmarks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Include\qte.h">
@@ -137,6 +140,12 @@
     </Filter>
     <Filter Include="Include\Scenes">
       <UniqueIdentifier>{20980577-3f91-4ea5-8970-281aea776bef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Benchmarks">
+      <UniqueIdentifier>{4939f5a5-0527-4354-9bd7-2629e8a209b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Benchmarks">
+      <UniqueIdentifier>{e94a1ee1-433f-4b67-a1df-b82397bb6cb1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="Include\Scenes\ArchScene.h">
       <Filter>Include\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Benchmarks\SDFBenchmark.h">
+      <Filter>Include\Benchmarks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

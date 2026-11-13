@@ -103,6 +103,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Adapters\NodeFieldAdapter.cpp" />
+    <ClCompile Include="Source\Benchmarks\SDFBenchmark.cpp" />
     <ClCompile Include="Source\box.cpp" />
     <ClCompile Include="Source\camera.cpp" />
     <ClCompile Include="Source\evector.cpp" />
@@ -172,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Adapters\NodeFieldAdapter.h" />
+    <ClInclude Include="Include\Benchmarks\SDFBenchmark.h" />
     <ClInclude Include="Include\box.h" />
     <ClInclude Include="Include\camera.h" />
     <ClInclude Include="Include\color.h" />

@@ -15,6 +15,11 @@ public:
     double Lipschitz() const override;
 
 private:
-    Vector p_min_;
-    Vector p_max_;
+    // ancienne version
+    //Vector p_min_;
+    //Vector p_max_;
+
+    // version optimisée en temps de calcul
+    Vector center_;
+    Vector half_;
 };
