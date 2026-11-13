@@ -49,6 +49,9 @@ public slots:
 	// smooth union examples
 	void SmoothUnionPolynomialNodeExample();
 	void SmoothUnionExpNodeExample();
+
+	// arch scene
+	void ArchSceneExample();
 };
 
 #endif

@@ -83,6 +83,9 @@
     <ClCompile Include="Source\SDF\TranslationNode.cpp">
       <Filter>Source\SDF</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scenes\ArchScene.cpp">
+      <Filter>Source\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Include\qte.h">
@@ -128,6 +131,12 @@
     </Filter>
     <Filter Include="Include\Adapters">
       <UniqueIdentifier>{ec7c6244-645c-4224-b208-bb3bec7f61ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Scenes">
+      <UniqueIdentifier>{65892924-74ae-4835-9135-1444f97aaf9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Scenes">
+      <UniqueIdentifier>{20980577-3f91-4ea5-8970-281aea776bef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +211,9 @@
     </ClInclude>
     <ClInclude Include="Include\SDF\TranslationNode.h">
       <Filter>Include\SDF</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Scenes\ArchScene.h">
+      <Filter>Include\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

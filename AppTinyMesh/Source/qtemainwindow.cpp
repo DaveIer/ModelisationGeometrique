@@ -17,6 +17,8 @@
 #include "SDF/TranslationNode.h"
 #include "SDF/RotationNode.h"
 
+#include "Scenes/ArchScene.h"
+
 //#include <memory>
 //#include <utility>
 
@@ -58,7 +60,8 @@ void MainWindow::CreateActions()
 	connect(uiw->intersectionNode, SIGNAL(clicked()), this, SLOT(IntersectionNodeExample())); // IntersectionNode
 	connect(uiw->differenceNode, SIGNAL(clicked()), this, SLOT(DifferenceNodeExample())); // DifferenceNode
 	connect(uiw->translationNode, SIGNAL(clicked()), this, SLOT(TranslationNodeExample())); // TranslationNode
-	connect(uiw->rotationNode, SIGNAL(clicked()), this, SLOT(RotationNodeExample())); // RotationNode)
+	connect(uiw->rotationNode, SIGNAL(clicked()), this, SLOT(RotationNodeExample())); // RotationNode
+	connect(uiw->archScene, SIGNAL(clicked()), this, SLOT(ArchSceneExample())); // Arch Scene
 	connect(uiw->resetcameraButton, SIGNAL(clicked()), this, SLOT(ResetCamera()));
 	connect(uiw->wireframe, SIGNAL(clicked()), this, SLOT(UpdateMaterial()));
 	connect(uiw->radioShadingButton_1, SIGNAL(clicked()), this, SLOT(UpdateMaterial()));
@@ -338,6 +341,26 @@ void MainWindow::RotationNodeExample()
 		cols[i] = Color(0.8, 0.8, 0.8);
 
 	meshColor = MeshColor(implicitMesh, cols, implicitMesh.VertexIndexes());
+	UpdateGeometry();
+}
+
+/* ---------------- Arch Scene---------------- */
+void MainWindow::ArchSceneExample()
+{
+	auto arch = CreateArchScene();
+	NodeFieldAdapter implicit(*arch);
+
+	Mesh implicitMesh;
+	implicit.Polygonize(156, implicitMesh, Box(3.5));
+
+	std::vector<Color> cols;
+	cols.resize(implicitMesh.Vertexes());
+
+	for (size_t i = 0; i < cols.size(); i++)
+		cols[i] = Color(0.8, 0.8, 0.8);
+
+	meshColor = MeshColor(implicitMesh, cols, implicitMesh.VertexIndexes());
+
 	UpdateGeometry();
 }
 

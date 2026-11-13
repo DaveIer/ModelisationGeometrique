@@ -55,6 +55,7 @@ public:
     QPushButton *differenceNode;
     QPushButton *translationNode;
     QPushButton *rotationNode;
+    QPushButton *archScene;
     QWidget *widget_GL;
     QGroupBox *Parameters_groupBox;
     QGroupBox *groupBox_4;
@@ -166,6 +167,10 @@ public:
         rotationNode->setObjectName("rotationNode");
         rotationNode->setGeometry(QRect(140, 110, 101, 23));
         rotationNode->setCheckable(false);
+        archScene = new QPushButton(Objects_groupBox);
+        archScene->setObjectName("archScene");
+        archScene->setGeometry(QRect(140, 140, 101, 23));
+        archScene->setCheckable(false);
 
         hboxLayout->addWidget(Objects_groupBox);
 
@@ -398,6 +403,17 @@ public:
 "								", nullptr));
 #endif // QT_CONFIG(tooltip)
         rotationNode->setText(QCoreApplication::translate("Assets", "Rotation Node", nullptr));
+#if QT_CONFIG(tooltip)
+        archScene->setToolTip(QCoreApplication::translate("Assets", "\n"
+"									<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"									<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"									p, li { white-space: pre-wrap; }\n"
+"									</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#5500ff;\">Callback #01</span></p>\n"
+"									<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-style:italic; color:#aa00ff;\">Create Eurographics 1996 Bear</span></p></body></html>\n"
+"								", nullptr));
+#endif // QT_CONFIG(tooltip)
+        archScene->setText(QCoreApplication::translate("Assets", "Arch Scene", nullptr));
         Parameters_groupBox->setTitle(QString());
         groupBox_4->setTitle(QCoreApplication::translate("Assets", " Statistics", nullptr));
         label_2->setText(QCoreApplication::translate("Assets", "Vertex", nullptr));
