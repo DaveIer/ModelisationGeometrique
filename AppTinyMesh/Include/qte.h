@@ -52,6 +52,9 @@ public slots:
 
 	// arch scene
 	void ArchSceneExample();
+
+	// sphere tracing
+	void SphereTraceExample(); // David
 };
 
 #endif

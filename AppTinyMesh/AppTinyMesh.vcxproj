@@ -75,7 +75,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>Include\;$(QTDIR64)\include\;Libs\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(GLEW_DIR);Include\;$(QTDIR64)\include\;Libs\</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <OmitFramePointers>true</OmitFramePointers>
       <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -125,6 +125,8 @@
     <ClCompile Include="Source\SDF\SmoothUnionExpNode.cpp" />
     <ClCompile Include="Source\SDF\SmoothUnionPolynomialNode.cpp" />
     <ClCompile Include="Source\SDF\SphereNode.cpp" />
+    <ClCompile Include="Source\SDF\SphereTraceRender.cpp" />
+    <ClCompile Include="Source\SDF\SphereTracing.cpp" />
     <ClCompile Include="Source\SDF\TorusNode.cpp" />
     <ClCompile Include="Source\SDF\TranslationNode.cpp" />
     <ClCompile Include="Source\SDF\UnaryNode.cpp" />
@@ -191,6 +193,8 @@
     <ClInclude Include="Include\SDF\SmoothUnionExpNode.h" />
     <ClInclude Include="Include\SDF\SmoothUnionPolynomialNode.h" />
     <ClInclude Include="Include\SDF\SphereNode.h" />
+    <ClInclude Include="Include\SDF\SphereTraceRender.h" />
+    <ClInclude Include="Include\SDF\SphereTracing.h" />
     <ClInclude Include="Include\SDF\TorusNode.h" />
     <ClInclude Include="Include\SDF\TranslationNode.h" />
     <ClInclude Include="Include\SDF\UnaryNode.h" />
