@@ -89,7 +89,12 @@
     <ClCompile Include="Source\Benchmarks\SDFBenchmark.cpp">
       <Filter>Source\Benchmarks</Filter>
     </ClCompile>
-  </ItemGroup>
+    <ClCompile Include="Source\SDF\SphereTracing.cpp">
+      <Filter>Source\SDF</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SDF\SphereTraceRender.cpp">
+      <Filter>Source\SDF</Filter>
+    </ClCompile>  </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Include\qte.h">
       <Filter>Include</Filter>
@@ -226,6 +231,12 @@
     </ClInclude>
     <ClInclude Include="Include\Benchmarks\SDFBenchmark.h">
       <Filter>Include\Benchmarks</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDF\SphereTracing.h">
+      <Filter>Include\SDF</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDF\SphereTraceRender.h">
+      <Filter>Include\SDF</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -156,6 +156,7 @@ public:
 
   Ray ComputeRay(const QPoint&) const;
   void SetCamera(const Camera&);
+  const Camera& GetCamera() const { return camera; } // David
 
   void SetCameraMode(bool);
   void SetNearAndFarPlane(double, double);

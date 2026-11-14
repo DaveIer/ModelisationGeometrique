@@ -21,6 +21,12 @@
 
 #include <iostream>
 #include <chrono>
+#include <QtWidgets/QPushButton> // David
+#include <QtWidgets/QLabel> // David
+#include "SDF/SphereTraceRender.h" // David
+
+//#include <memory>
+//#include <utility>
 
 MainWindow::MainWindow() : QMainWindow(), uiw(new Ui::Assets)
 {
@@ -70,6 +76,12 @@ void MainWindow::CreateActions()
 	// Widget edition
 	connect(meshWidget, SIGNAL(_signalEditSceneLeft(const Ray&)), this, SLOT(editingSceneLeft(const Ray&)));
 	connect(meshWidget, SIGNAL(_signalEditSceneRight(const Ray&)), this, SLOT(editingSceneRight(const Ray&)));
+
+	// David
+	// Sphere tracing (button code-created)
+	QPushButton* sphereTraceButton = new QPushButton("Sphere Tracing", uiw->Objects_groupBox);
+	sphereTraceButton->setGeometry(140, 50, 101, 23);
+	connect(sphereTraceButton, &QPushButton::clicked, this, &MainWindow::SphereTraceExample);
 }
 
 void MainWindow::editingSceneLeft(const Ray&)
@@ -371,6 +383,28 @@ void MainWindow::ArchSceneExample()
 	meshColor = MeshColor(implicitMesh, cols, implicitMesh.VertexIndexes());
 
 	UpdateGeometry();
+}
+
+// David
+void MainWindow::SphereTraceExample()
+{
+	auto scene = CreateArchScene();
+	const Camera& camera = meshWidget->GetCamera();
+
+	SphereTraceParams params;
+	params.t_max = Norm(camera.Eye()) + 10.0;   // distance à l'origine + rayon de la scène
+
+	// Demi-résolution : plus rapide, le cadrage reste identique
+	const int w = meshWidget->width() / 2;
+	const int h = meshWidget->height() / 2;
+
+	QImage image = RenderSphereTrace(*scene, camera, w, h, params);
+
+	QLabel* label = new QLabel;
+	label->setWindowTitle("Sphere tracing");
+	label->setAttribute(Qt::WA_DeleteOnClose);
+	label->setPixmap(QPixmap::fromImage(image));
+	label->show();
 }
 
 void MainWindow::UpdateGeometry()
