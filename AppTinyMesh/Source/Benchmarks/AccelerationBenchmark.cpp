@@ -6,6 +6,8 @@
 #include "SDF/SphereNode.h"
 #include "SDF/BoxNode.h"
 
+#include "Scenes/ArchScene.h"
+
 #include <iostream>
 #include <memory>
 #include <cmath>
@@ -176,9 +178,39 @@ namespace
             << " / " << 16 * points.size() << std::endl;
     }
 
-    void BenchmarkNode(const char* name, const Node& node, const std::vector<Vector>& points)
+    void TestAcceleratedArch()
     {
-        constexpr int N = 10000000;
+        auto classic_arch = CreateArchScene();
+        auto accelerated_arch = CreateArchSceneAccelerated();
+
+        const auto points = GeneratePoints();
+
+        int errors = 0;
+        double max_error = 0.0;
+
+        for (const Vector& q : points)
+        {
+            // on adapte les points aux dimensions de l'arche
+            Vector p(
+                q[0] * (1.7 / 1.5),
+                q[1] * (0.8 / 1.5),
+                1.55 + q[2] * (1.95 / 1.5)
+            );
+
+            const double error = std::abs(classic_arch->Value(p) - accelerated_arch->Value(p));
+            if (error > 1e-9)
+                ++errors;
+
+            max_error = std::max(max_error, error);
+        }
+
+        std::cout << "\Accelerated arch: "
+            << errors << " errors / " << points.size()
+            << ", max_error " << max_error << std::endl;
+    }
+
+    void BenchmarkNode(const char* name, const Node& node, const std::vector<Vector>& points, int N = 10000000)
+    {
         constexpr int repetitions = 5;
 
         std::vector<double> times;
@@ -227,12 +259,36 @@ namespace
         BenchmarkNode("Acceleration Box", *accelerated_box, points);
         BenchmarkNode("Acceleration Sphere", *accelerated_sphere, points);
     }
+
+    void BenchmarkAcceleratedArch()
+    {
+        auto points = GeneratePoints();
+
+        for (Vector& p : points)
+        {
+            p = Vector(
+                p[0] * (1.7 / 1.5),
+                p[1] * (0.8 / 1.5),
+                1.55 + p[2] * (1.95 / 1.5)
+            );
+        }
+
+        auto classic_arch = CreateArchScene();
+        auto accelerated_arch = CreateArchSceneAccelerated();
+
+        BenchmarkNode("Classic arch", *classic_arch, points, 100000);
+        BenchmarkNode("Accelerated arch", *accelerated_arch, points, 100000);
+    }
 }
 
 void RunAccelerationBenchmarks()
 {
 	std::cout << "\nAcceleration Benchmarks" << std::endl;
 
-    TestAcceleratedUnion();
-    BenchmarkAcceleration();
+    //TestAcceleratedUnion();
+    //BenchmarkAcceleration();
+
+    /* --- Evaluation de l'arche --- */
+    TestAcceleratedArch();
+    BenchmarkAcceleratedArch();
 }

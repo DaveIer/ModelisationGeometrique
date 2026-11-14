@@ -7,6 +7,9 @@
 #include "SDF/DifferenceNode.h"
 #include "SDF/RotationNode.h"
 
+#include "SDF/AcceleratedUnionNode.h"
+#include "SDF/BoundingVolumeNode.h"
+
 #include <memory>
 #include <utility>
 
@@ -114,23 +117,44 @@ namespace
 	}
 }
 
-std::unique_ptr<Node> CreateArchScene()
+std::unique_ptr<Node> CreateArchSceneImplementation(bool accelerated)
 {
 	auto pillars = CreatePillars();
 	auto pillar_joints = CreatePillarJoints();
-	
+
 	auto vault = CtreateVault();
 	auto joints = CreateVaultJoints();
 
 	auto bases = CreateBase();
-	
+
 	auto stone_vault = std::make_unique<DifferenceNode>(std::move(vault), std::move(joints));
 	auto stone_pillar = std::make_unique<DifferenceNode>(std::move(pillars), std::move(pillar_joints));
 
 	auto capitals = CreateCapitals();
 	auto pillar_deco = std::make_unique<UnionNode>(std::move(stone_pillar), std::move(capitals));
 
-	auto arch = std::make_unique<UnionNode>(std::move(pillar_deco), std::move(stone_vault));
+	std::unique_ptr<Node> arch;
 
+	if (accelerated)
+	{
+		arch = std::make_unique<AcceleratedUnionNode>(
+			std::make_unique<BoundingVolumeNode>(std::move(pillar_deco), Vector(-1.38, -0.52, 0.0), Vector(1.38, 0.52, 2.05)),
+			std::make_unique<BoundingVolumeNode>(std::move(stone_vault), Vector(-1.5, -0.4, 2.0), Vector(1.5, 0.4, 3.5))
+		);
+	}
+	else
+	{
+		arch = std::make_unique<UnionNode>(std::move(pillar_deco), std::move(stone_vault));
+	}
 	return std::make_unique<UnionNode>(std::move(arch), std::move(bases));
+}
+
+std::unique_ptr<Node> CreateArchScene()
+{
+	return CreateArchSceneImplementation(false);
+}
+
+std::unique_ptr<Node> CreateArchSceneAccelerated()
+{
+	return CreateArchSceneImplementation(true);
 }

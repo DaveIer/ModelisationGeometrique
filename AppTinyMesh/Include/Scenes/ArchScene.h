@@ -9,3 +9,4 @@
  * Z : hauteur.
  */
 std::unique_ptr<Node> CreateArchScene();
+std::unique_ptr<Node> CreateArchSceneAccelerated();
