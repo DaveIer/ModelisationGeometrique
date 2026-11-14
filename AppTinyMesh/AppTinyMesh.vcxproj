@@ -103,6 +103,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Adapters\NodeFieldAdapter.cpp" />
+    <ClCompile Include="Source\Benchmarks\AccelerationBenchmark.cpp" />
     <ClCompile Include="Source\Benchmarks\SDFBenchmark.cpp" />
     <ClCompile Include="Source\box.cpp" />
     <ClCompile Include="Source\camera.cpp" />
@@ -117,7 +118,9 @@
     <ClCompile Include="Source\qtemainwindow.cpp" />
     <ClCompile Include="Source\ray.cpp" />
     <ClCompile Include="Source\Scenes\ArchScene.cpp" />
+    <ClCompile Include="Source\SDF\AcceleratedUnionNode.cpp" />
     <ClCompile Include="Source\SDF\BinaryNode.cpp" />
+    <ClCompile Include="Source\SDF\BoundingVolumeNode.cpp" />
     <ClCompile Include="Source\SDF\BoxNode.cpp" />
     <ClCompile Include="Source\SDF\CapsuleNode.cpp" />
     <ClCompile Include="Source\SDF\DifferenceNode.cpp" />
@@ -173,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Adapters\NodeFieldAdapter.h" />
+    <ClInclude Include="Include\Benchmarks\AccelerationBenchmark.h" />
     <ClInclude Include="Include\Benchmarks\SDFBenchmark.h" />
     <ClInclude Include="Include\box.h" />
     <ClInclude Include="Include\camera.h" />
@@ -183,7 +187,9 @@
     <ClInclude Include="Include\meshcolor.h" />
     <ClInclude Include="Include\ray.h" />
     <ClInclude Include="Include\Scenes\ArchScene.h" />
+    <ClInclude Include="Include\SDF\AcceleratedUnionNode.h" />
     <ClInclude Include="Include\SDF\BinaryNode.h" />
+    <ClInclude Include="Include\SDF\BoundingVolumeNode.h" />
     <ClInclude Include="Include\SDF\BoxNode.h" />
     <ClInclude Include="Include\SDF\CapsuleNode.h" />
     <ClInclude Include="Include\SDF\DifferenceNode.h" />

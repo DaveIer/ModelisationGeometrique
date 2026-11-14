@@ -2,6 +2,8 @@
 #include <QtWidgets/qapplication.h>
 
 #include "Benchmarks/SDFBenchmark.h"
+#include "Benchmarks/AccelerationBenchmark.h"
+
 #include <cstring>
 #include <iostream>
 
@@ -15,6 +17,16 @@ int main(int argc, char *argv[])
 		std::cout << "Appuyer sur Entree pour quitter la console." << std::endl;
 		std::cin.get();
 
+		return 0;
+	}
+
+	if (argc > 1 && std::strcmp(argv[1], "--benchmark-acceleration") == 0)
+	{
+		RunAccelerationBenchmarks();
+
+		std::cout << "Appuyer sur Entree pour quitter la console." << std::endl;
+		std::cin.get();
+		
 		return 0;
 	}
 
