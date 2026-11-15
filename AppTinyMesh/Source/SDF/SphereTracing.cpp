@@ -20,16 +20,15 @@ bool SphereTrace(const Node& root, const Ray& ray, const SphereTraceParams& para
         const Vector p = origin + t * direction;
         const double d = root.Value(p);
 
-        // d < epsilon (et non |d|) : un rayon qui démarre à l'intérieur
-        // (d < 0) est un hit immédiat.
-        if (d < params.epsilon) {
+        // |d| < epsilon
+        if (abs(d) < params.epsilon) {
             t_hit = t;
             hit_point = p;
             return true;
         }
 
-        // Pas sûr : la surface est à au moins d / K.
-        t += d * inv_k;
+        // Pas sûr
+        t += d / k;
     }
 
     return false;

@@ -7,7 +7,7 @@
 struct SphereTraceParams {
     double t_min = 0.0;       // début de la recherche le long du rayon
     double t_max = 100.0;     // fin de la recherche
-    double epsilon = 1e-4;    // seuil de hit : f(p) < epsilon
+    double epsilon = 1e-4;    // seuil de hit : |f(p)| < epsilon
     int max_steps = 256;      // garde-fou contre les incidences rasantes
 };
 

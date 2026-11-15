@@ -24,6 +24,9 @@ public:
 	void CreateActions();
 	void UpdateGeometry();
 
+	// erosion
+	void ErosionExample(int batchSize, bool parallel);
+
 public slots:
 	void editingSceneLeft(const Ray&);
 	void editingSceneRight(const Ray&);
