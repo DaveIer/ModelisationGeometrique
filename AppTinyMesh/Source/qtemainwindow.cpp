@@ -30,8 +30,21 @@
 #include <QtCore/QDir>
 #include <QtGui/QPainter>
 
+// David
+//#include <QtWidgets/QPushButton> 
+//#include <QtWidgets/QLabel>
+//#include <QtWidgets/QApplication>
+#include "SDF/SphereTraceRender.h"
+#include "SDF/ErosionDemo.h"
+#include "SDF/ErosionNode.h"
+#include <QtCore/QElapsedTimer>
+//#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QPlainTextEdit>
+//#include <QtWidgets/QVBoxLayout>
+#include <algorithm>
+#include <vector>
 
-//#include <memory>
+#include <memory>
 //#include <utility>
 
 namespace
@@ -49,6 +62,133 @@ namespace
 		if (outlines)
 			viewer->SetShading(name, MeshShading::Lines);
 	}
+static void ShowTraceBenchmark(const Camera& camera)
+{
+	struct Entry
+	{
+		QString group;               // parametre etudie
+		QString value;               // valeur testee
+		QString note;                // remarque affichee sous l'image
+		SphereTraceParams params;
+		QImage image;
+		double ms = 0.0;             // temps median du rendu
+	};
+
+	QApplication::setOverrideCursor(Qt::WaitCursor);
+
+	auto scene = CreateArchScene();
+
+	const double d = Norm(camera.Eye());   // distance a l'origine (la scene est autour de l'origine)
+
+	SphereTraceParams base;                // defaut : epsilon = 1e-4, max_steps = 256
+	base.t_max = d + 10.0;                 // comme le bouton "Sphere Tracing"
+
+	std::vector<Entry> entries;
+	auto add = [&](const QString& group, const QString& value, const QString& note, const SphereTraceParams& params)
+		{
+			Entry e;
+			e.group = group;
+			e.value = value;
+			e.note = note;
+			e.params = params;
+			entries.push_back(e);
+		};
+
+	SphereTraceParams p;
+
+	// epsilon : trop grand -> surface gonflee (environ epsilon) ; trop petit -> plus de pas
+	p = base; p.epsilon = 0.3;  add("epsilon", "0.3", "trop grand", p);
+	p = base; p.epsilon = 1e-2; add("epsilon", "1e-2", "", p);
+	add("epsilon", "1e-4", "defaut", base);
+	p = base; p.epsilon = 1e-8; add("epsilon", "1e-8", "tres petit", p);
+
+	// t_max : trop petit -> la scene est coupee ; trop grand -> les rayons qui ratent vont plus loin
+	p = base; p.t_max = 0.8 * d; add("t_max", QString::number(p.t_max, 'g', 3), "trop petit", p);
+	p = base; p.t_max = 1.0 * d; add("t_max", QString::number(p.t_max, 'g', 3), "scene coupee", p);
+	add("t_max", QString::number(base.t_max, 'g', 3), "defaut", base);
+	p = base; p.t_max = 1000.0;  add("t_max", "1000", "tres grand", p);
+
+	// max_steps : trop petit -> surface ratee ; trop grand -> aucun effet
+	p = base; p.max_steps = 8;    add("max_steps", "8", "trop petit", p);
+	p = base; p.max_steps = 32;   add("max_steps", "32", "", p);
+	add("max_steps", "256", "defaut", base);
+	p = base; p.max_steps = 1024; add("max_steps", "1024", "tres grand", p);
+
+	// Mesure : mediane de plusieurs rendus complets (trace + ombrage), apres un rendu d'echauffement non chronometre.
+	// Plus il y a de pixels et de repetitions, moins la mesure est bruitee.
+	const int size = 300;
+	const int repetitions = 9;
+
+	for (Entry& e : entries)
+	{
+		RenderSphereTrace(*scene, camera, size, size, e.params);   // echauffement (non retenu)
+
+		std::vector<double> times;
+		for (int r = 0; r < repetitions; ++r)
+		{
+			QElapsedTimer timer;
+			timer.start();
+			e.image = RenderSphereTrace(*scene, camera, size, size, e.params);
+			times.push_back(double(timer.nsecsElapsed()) / 1.0e6);
+		}
+		std::sort(times.begin(), times.end());
+		e.ms = times[times.size() / 2];
+	}
+
+	QApplication::restoreOverrideCursor();
+
+	// Fenetre : une ligne d'images par parametre, puis le tableau
+	QWidget* window = new QWidget;
+	window->setAttribute(Qt::WA_DeleteOnClose);
+	window->setWindowTitle("Benchmark sphere tracing (arche)");
+	QVBoxLayout* layout = new QVBoxLayout(window);
+
+	layout->addWidget(new QLabel(QString("Temps = mediane de %1 rendus complets de %2x%2 pixels. Un seul parametre varie par ligne.").arg(repetitions).arg(size)));
+
+	QGridLayout* grid = new QGridLayout;
+	layout->addLayout(grid);
+
+	QString table = "Parametre | Valeur | Remarque | Temps median (ms)\n";
+	QString lastGroup;
+	int row = -1;
+	int column = 0;
+
+	for (const Entry& e : entries)
+	{
+		if (e.group != lastGroup)
+		{
+			++row;
+			column = 0;
+			lastGroup = e.group;
+		}
+
+		QLabel* image = new QLabel;
+		image->setPixmap(QPixmap::fromImage(e.image));
+
+		QString caption = QString("%1 = %2").arg(e.group).arg(e.value);
+		if (!e.note.isEmpty())
+			caption += " (" + e.note + ")";
+		caption += QString("\n%1 ms").arg(e.ms, 0, 'f', 1);
+
+		QLabel* text = new QLabel(caption);
+		text->setAlignment(Qt::AlignHCenter);
+
+		QVBoxLayout* cell = new QVBoxLayout;
+		cell->addWidget(image);
+		cell->addWidget(text);
+		grid->addLayout(cell, row, column++);
+
+		table += QString("%1 | %2 | %3 | %4\n").arg(e.group, e.value, e.note).arg(e.ms, 0, 'f', 1);
+	}
+
+	QPlainTextEdit* tableView = new QPlainTextEdit;
+	tableView->setReadOnly(true);
+	tableView->setPlainText(table);
+	tableView->setMaximumHeight(220);
+	layout->addWidget(tableView);
+
+	window->show();
+}
 }
 
 MainWindow::MainWindow() : QMainWindow(), uiw(new Ui::Assets)
@@ -299,6 +439,23 @@ void MainWindow::CreateActions()
 			label->setPixmap(QPixmap::fromImage(comparison));
 			label->show();
 		});
+	uiw->Objects_groupBox->setMinimumHeight(510);
+	
+	QPushButton* traceBenchButton = new QPushButton("Benchmark sphere tracing", uiw->Objects_groupBox);
+	traceBenchButton->setGeometry(140, 380, 140, 23);
+	connect(traceBenchButton, &QPushButton::clicked, this, [this] { ShowTraceBenchmark(meshWidget->GetCamera()); });
+
+	QPushButton* erosionIncButton = new QPushButton("Erosion incrementale", uiw->Objects_groupBox);
+	erosionIncButton->setGeometry(140, 410, 140, 23);
+	connect(erosionIncButton, &QPushButton::clicked, this, [this] { ErosionExample(1, false); });
+
+	QPushButton* erosionBatchButton = new QPushButton("Erosion par paquets", uiw->Objects_groupBox);
+	erosionBatchButton->setGeometry(140, 440, 140, 23);
+	connect(erosionBatchButton, &QPushButton::clicked, this, [this] { ErosionExample(3000, false); });
+
+	QPushButton* erosionBenchButton = new QPushButton("Benchmark erosion", uiw->Objects_groupBox);
+	erosionBenchButton->setGeometry(140, 470, 140, 23);
+	connect(erosionBenchButton, &QPushButton::clicked, this, [] { ShowErosionBenchmark(); });
 }
 
 void MainWindow::editingSceneLeft(const Ray&)
@@ -633,6 +790,27 @@ void MainWindow::UpdateGeometry()
 	uiw->lineEdit_2->setText(QString::number(meshColor.Triangles()));
 
 	UpdateMaterial();
+}
+
+void MainWindow::ErosionExample(int batchSize, bool parallel)
+{
+	// Érosion + fenêtre de rendu et de statistiques
+	std::unique_ptr<ErosionNode> eroded = ShowErosionRun(batchSize, parallel);
+	QApplication::processEvents();   // laisse la fenêtre s'afficher avant le calcul du mesh
+
+	// Le même objet érodé, polygonisé pour le viewer (rotation à la souris)
+	QApplication::setOverrideCursor(Qt::WaitCursor);
+
+	NodeFieldAdapter implicit(*eroded);
+
+	Mesh implicitMesh;
+	implicit.Polygonize(128, implicitMesh, Box(1.05));
+
+	std::vector<Color> cols(implicitMesh.Vertexes(), Color(0.8, 0.8, 0.8));
+	meshColor = MeshColor(implicitMesh, cols, implicitMesh.VertexIndexes());
+	UpdateGeometry();
+
+	QApplication::restoreOverrideCursor();
 }
 
 void MainWindow::UpdateMaterial()

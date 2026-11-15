@@ -94,7 +94,17 @@
     </ClCompile>
     <ClCompile Include="Source\SDF\SphereTraceRender.cpp">
       <Filter>Source\SDF</Filter>
-    </ClCompile>  </ItemGroup>
+    </ClCompile>
+    <ClCompile Include="Source\SDF\Erosion.cpp">
+      <Filter>Source\SDF</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SDF\ErosionNode.cpp">
+      <Filter>Source\SDF</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SDF\ErosionDemo.cpp">
+      <Filter>Source\SDF</Filter>
+    </ClCompile>
+  </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Include\qte.h">
       <Filter>Include</Filter>
@@ -236,6 +246,15 @@
       <Filter>Include\SDF</Filter>
     </ClInclude>
     <ClInclude Include="Include\SDF\SphereTraceRender.h">
+      <Filter>Include\SDF</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDF\Erosion.h">
+      <Filter>Include\SDF</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDF\ErosionNode.h">
+      <Filter>Include\SDF</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDF\ErosionDemo.h">
       <Filter>Include\SDF</Filter>
     </ClInclude>
   </ItemGroup>
