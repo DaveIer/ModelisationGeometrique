@@ -6,7 +6,11 @@
 #include "SDF/SphereNode.h"
 #include "SDF/BoxNode.h"
 
+#include "SDF/SphereTracing.h"
+
 #include "Scenes/ArchScene.h"
+
+#include "camera.h"
 
 #include <iostream>
 #include <memory>
@@ -279,7 +283,142 @@ namespace
         BenchmarkNode("Classic arch", *classic_arch, points, 100000);
         BenchmarkNode("Accelerated arch", *accelerated_arch, points, 100000);
     }
+
+    void TestAcceleratedSphereTracing()
+    {
+        auto classic_arch = CreateArchScene();
+        auto accelerated_arch = CreateArchSceneAccelerated();
+
+        Camera camera(Vector(4.0, -6.0, 3.4), Vector(0.0, 0.0, 1.5));
+
+        SphereTraceParams params;
+        params.t_max = 20.0;
+
+        constexpr int width  = 32;
+        constexpr int height = 32;
+
+        int hits = 0;
+        int different_hits = 0;
+        int different_distances = 0;
+        double max_error = 0.0;
+
+        for (int j = 0; j < height; ++j)
+        {
+            for (int i = 0; i < width; ++i)
+            {
+                const Ray ray = camera.PixelToRay(i, j, width, height);
+
+                double t_classic = 0.0;
+                double t_accelerated = 0.0;
+
+                Vector p_classic;
+                Vector p_accelerated;
+
+                const bool hit_classic = SphereTrace(*classic_arch, ray, params, t_classic, p_classic);
+                const bool hit_accelerated = SphereTrace(*accelerated_arch, ray, params, t_accelerated, p_accelerated);
+
+                if (hit_classic != hit_accelerated)
+                {
+                    ++different_hits;
+                    continue;
+                }
+                if (hit_classic)
+                {
+                    ++hits;
+                    const double error = std::abs(t_classic - t_accelerated);
+                    if (error > 1e-4)
+                        ++different_distances;
+
+                    max_error = std::max(max_error, error);
+                }
+            }
+        }
+
+        std::cout << "Sphere Tracing - Arch" << std::endl;
+        std::cout << "Rays: " << width * height << std::endl;
+        std::cout << "Hits: " << hits << std::endl;
+        std::cout << "Different hit results: " << different_hits << std::endl;
+        std::cout << "Different distances: " << different_distances << std::endl;
+        std::cout << "Max distance error: " << max_error << std::endl;
+    }
+
+    void BenchmarkSphereTracingNode(const char* name, const Node& node, std::vector<Ray>& rays, const SphereTraceParams& params)
+    {
+        constexpr int repetitions = 5;
+
+        std::vector<double> times;
+        times.reserve(repetitions);
+
+        int hits = 0;
+        double checksum = 0.0;
+
+        for (int r = 0; r < repetitions; ++r)
+        {
+            int current_hits = 0;
+            double sum = 0.0;
+
+            const auto start = std::chrono::steady_clock::now();
+            for (const Ray& ray : rays)
+            {
+                double t = 0.0;
+                Vector hit_point;
+
+                if (SphereTrace(node, ray, params, t, hit_point))
+                {
+                    ++current_hits;
+                    sum += t;
+                }
+            }
+
+            const auto end = std::chrono::steady_clock::now();
+            std::chrono::duration<double, std::milli> time = end - start;
+            times.push_back(time.count());
+
+            hits = current_hits;
+            checksum = sum;
+        }
+
+        std::sort(times.begin(), times.end());
+
+        std::cout << name
+            << ": median = " << times[2] << " ms"
+            << ", min = " << times.front() << " ms"
+            << ", max = " << times.back() << " ms"
+            << ", hits = " << hits
+            << ", checksum = " << checksum
+            << std::endl;
+    }
+
+    void BenchmarkAcceleratedSphereTracing()
+    {
+        auto classic_arch = CreateArchScene();
+        auto accelerated_arch = CreateArchSceneAccelerated();
+
+        Camera camera(Vector(4.0, -6.0, 3.4), Vector(0.0, 0.0, 1.5));
+
+        SphereTraceParams params;
+        params.t_max = 20.0;
+
+        constexpr int width  = 512;
+        constexpr int height = 512;
+
+        std::vector<Ray> rays;
+        rays.reserve(width * height);
+
+        for (int j = 0; j < height; ++j)
+        {
+            for (int i = 0; i < width; ++i)
+            {
+                rays.push_back(camera.PixelToRay(i, j, width, height));
+            }
+        }
+
+        BenchmarkSphereTracingNode("Classic Sphere Tracing", *classic_arch, rays, params);
+        BenchmarkSphereTracingNode("Accelerated Sphere Tracing", *accelerated_arch, rays, params);
+    }
 }
+
+
 
 void RunAccelerationBenchmarks()
 {
@@ -289,6 +428,10 @@ void RunAccelerationBenchmarks()
     //BenchmarkAcceleration();
 
     /* --- Evaluation de l'arche --- */
-    TestAcceleratedArch();
-    BenchmarkAcceleratedArch();
+    //TestAcceleratedArch();
+    //BenchmarkAcceleratedArch();
+
+    /* --- Sphere Tracing --- */
+    TestAcceleratedSphereTracing();
+    BenchmarkAcceleratedSphereTracing();
 }
